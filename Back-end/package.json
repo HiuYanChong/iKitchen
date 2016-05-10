@@ -1,0 +1,36 @@
+{
+  "name": "ikitchen",
+  "version": "0.0.1",
+  "description": "a order system to help restaurant",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.13",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "connect-mongo": "^1.1.0",
+    "express-session": "^1.13.0",
+    "gulp": "^1.0.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-watch": "^4.3.5",
+    "morgan": "^1.7.0"
+  },
+  "keywords": [
+    "order",
+    "restaurant"
+  ],
+  "author": "HiuYanChong",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/HiuYanChong/iKitchen/issues"
+  },
+  "homepage": "https://github.com/HiuYanChong/iKitchen#readme",
+}
