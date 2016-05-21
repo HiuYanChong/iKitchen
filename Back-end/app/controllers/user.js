@@ -20,8 +20,8 @@ exports.signup = function(req, res) {
     });
 };
 
-//signin
-exports.signin = function(req, res) {
+//login
+exports.login = function(req, res) {
     var _user = req.body.user;
     var password = _user.password;
 
@@ -34,9 +34,17 @@ exports.signin = function(req, res) {
                 if (isMatch === true) {
                     //设置session
                     req.session.user = user;
-                    //成功登陆
-                    //res.redirect('/');
-                    
+                    //成功登陆,根据角色跳转页面
+                    if (user.role === 1) {
+                        //服务员
+                        res.redirect('/serverView');
+                    } else if (user.role === 2) {
+                        //厨师
+                        res.redirect('/chiefView');
+                    } else if (user.role === 3) {
+                        //管理员
+                        res.redirect('/managerView');
+                    }
                 } else {
                     //密码错误
                     //res.redirect('/signin');
@@ -57,22 +65,38 @@ exports.logout = function(req, res) {
 };
 
 
-//middleware for user
-exports.signinRequired = function(req, res, next) {
+//检测是否已登录
+exports.loginRequired = function(req, res, next) {
     var user = req.session.user;
     if (!user) {
-        console.log("You should signin first!");
-        //return res.redirect("/signin");
+        return res.redirect("/");
     }
     next();
 };
 
-//权限管理
-exports.adminRequired = function(req, res, next) {
+//服务员权限管理
+exports.serverRequired = function(req, res, next) {
     var user = req.session.user;
-    /*if (!(user.role === 1 || user.role ===0)) {
-        console.log("You don't have the right to visit this page!");
-        return res.redirect("/signin");
-    }*/
+    if (user.role !== 1) {
+        return res.redirect("/");
+    }
+    next();
+};
+
+//厨师权限管理
+exports.chiefRequired = function(req, res, next) {
+    var user = req.session.user;
+    if (user.role !== 2) {
+        return res.redirect("/");
+    }
+    next();
+};
+
+//管理员权限管理
+exports.managerRequired = function(req, res, next) {
+    var user = req.session.user;
+    if (user.role !== 3) {
+        return res.redirect("/");
+    }
     next();
 };
