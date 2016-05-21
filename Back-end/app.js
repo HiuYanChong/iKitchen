@@ -17,6 +17,8 @@ db.once('open', function () {
   console.log("connect to the ikitchen sucessfully!");
 });
 
+app.set('views', 'app/views');
+app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(session({
     secret:'ikitchen',

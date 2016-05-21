@@ -1,5 +1,26 @@
 var Dish = require("../models/dish.js");
 
-module.exports = function() {
+//addDish
+exports.addDish = function(req, res) {
+
+};
+
+//deleteDish
+exports.deleteDish = function(req, res) {
+
+};
+
+//changeDishCount
+exports.changeDishCount = function(req, res) {
+
+};
+
+//showAllDish
+exports.showAllDish = function(req, res) {
+
+};
+
+//showAllDishAndCount
+exports.showAllDishAndCount = function(req, res) {
 
 };
