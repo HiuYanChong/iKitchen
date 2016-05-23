@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 //User 实体类
 var UserSchema = new mongoose.Schema({
@@ -25,17 +26,23 @@ var UserSchema = new mongoose.Schema({
 
 //在user保存之前，更新时间
 UserSchema.pre('save', function(next) {
+    var user = this;
     if(this.isNew) {
         this.meta.createdAt = this.meta.updateAt = Date.now();
     } else {
         this.meta.updateAt = Date.now();
     }
 
-    next();
+    //随机产生盐并加密
+    bcrypt.hash(user.password, null, function() {}, function(err, hash) {
+        if (err) next(err);
+        user.password = hash;
+        next();
+    });
 });
 
 //每个user实例拥有的方法
-UserSchema.mothods = {
+UserSchema.methods = {
     getName : function() {
         return this.name;
     },
@@ -59,6 +66,13 @@ UserSchema.mothods = {
         this.password = _passowrd;
         this.markModified('password');
         this.save();
+    },
+    comparePassword: function(_password, cb) {
+        var password = this.password;
+        bcrypt.compare(_password, password, function(err, res) {
+            if (err) cb(err);
+            cb(null, res);
+        });     
     }
 };
 
