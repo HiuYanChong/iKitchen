@@ -43,7 +43,7 @@ body {
     list-style: none;
 }
 
-.button-list li button {
+.button-list li a {
     width: 120px;
     margin-top: 10px;
 }
