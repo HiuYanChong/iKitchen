@@ -25,20 +25,15 @@ exports.signup = function(req, res) {
 
 //login
 exports.login = function(req, res) {
-<<<<<<< HEAD
-    var form = req.body.loginForm;
-    var password = form.password;
-=======
     var _user = req.body.user;
     console.log(req.body);
     var password = _user.password;
->>>>>>> origin/master
 
-    User.findOne({name: form.user}, function(err, user) {
+    User.findOne({name: user.name}, function(err, user) {
         if (err) console.log(err);
 
         if (user) {
-            user.comparePassword(form.password, function(err, isMatch) {
+            user.comparePassword(user.password, function(err, isMatch) {
                 if (err !== null) console.log(err);
                 if (isMatch === true) {
                     //设置session
