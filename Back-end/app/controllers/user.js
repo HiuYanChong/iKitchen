@@ -22,14 +22,14 @@ exports.signup = function(req, res) {
 
 //login
 exports.login = function(req, res) {
-    var _user = req.body.user;
-    var password = _user.password;
+    var form = req.body.loginForm;
+    var password = form.password;
 
-    User.findOne({name: _user.name}, function(err, user) {
+    User.findOne({name: form.user}, function(err, user) {
         if (err) console.log(err);
 
         if (user) {
-            user.comparePassword(_user.password, function(err, isMatch) {
+            user.comparePassword(form.password, function(err, isMatch) {
                 if (err !== null) console.log(err);
                 if (isMatch === true) {
                     //设置session
