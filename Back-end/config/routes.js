@@ -17,16 +17,22 @@ module.exports = function(app) {
 
 
     //user相关
-    app.post('/login', User.login);
-    app.get('logout', User.logout);
+    app.get('/signup', function(req, res) {
+        res.render("signup");
+    });
+    app.post('/signup', User.signup);
+    app.post('/login', User.login); 
+    app.get('/logout', User.logout, function(req, res) {
+        res.render("loginView");
+    });
     app.get('/serverView', User.loginRequired, User.serverRequired, function(req, res) {
         res.render('serverView');
     });
     app.get('/managerView',  User.loginRequired, User.managerRequired, function(req, res) {
-        res.render('serverView');
+        res.render('managerView');
     });
     app.get('/chiefView',  User.loginRequired, User.chiefRequired, function(req, res) {
-        res.render('serverView');
+        res.render('chiefView');
     });
 
 
