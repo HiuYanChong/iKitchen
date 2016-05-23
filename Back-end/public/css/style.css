@@ -21,7 +21,7 @@ body {
     height: 40px;
 }
 
-#login-form {
+#login, #signin {
     width: 300px;
 }
 
