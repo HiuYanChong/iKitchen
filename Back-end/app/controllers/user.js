@@ -9,11 +9,14 @@ exports.signup = function(req, res) {
 
         if (user) {
             //无法注册
+            console.log("用户名已存在");
         } else {
             var newUser = new User(_user);
             newUser.save(function(err, user) {
                 if (err) console.log(err);
                 //传送注册成功的信息
+                console.log("注册成功");
+                res.redirect('/');
             });
             res.end();
         }
@@ -22,8 +25,14 @@ exports.signup = function(req, res) {
 
 //login
 exports.login = function(req, res) {
+<<<<<<< HEAD
     var form = req.body.loginForm;
     var password = form.password;
+=======
+    var _user = req.body.user;
+    console.log(req.body);
+    var password = _user.password;
+>>>>>>> origin/master
 
     User.findOne({name: form.user}, function(err, user) {
         if (err) console.log(err);
@@ -35,24 +44,26 @@ exports.login = function(req, res) {
                     //设置session
                     req.session.user = user;
                     //成功登陆,根据角色跳转页面
-                    if (user.role === 1) {
+                    if (user.type === 1) {
                         //服务员
                         res.redirect('/serverView');
-                    } else if (user.role === 2) {
+                    } else if (user.type === 2) {
                         //厨师
                         res.redirect('/chiefView');
-                    } else if (user.role === 3) {
+                    } else if (user.type === 3) {
                         //管理员
                         res.redirect('/managerView');
                     }
                 } else {
                     //密码错误
-                    //res.redirect('/signin');
+                    console.log("password wrong");
+                    res.redirect('/');
                 }
             });
         } else {
             //用户名不存在
-            //res.redirect('/signup');      
+            console.log("no such user");
+            res.redirect('/');      
         }
     });
 };
@@ -77,7 +88,7 @@ exports.loginRequired = function(req, res, next) {
 //服务员权限管理
 exports.serverRequired = function(req, res, next) {
     var user = req.session.user;
-    if (user.role !== 1) {
+    if (user.type !== 1) {
         return res.redirect("/");
     }
     next();
@@ -86,7 +97,7 @@ exports.serverRequired = function(req, res, next) {
 //厨师权限管理
 exports.chiefRequired = function(req, res, next) {
     var user = req.session.user;
-    if (user.role !== 2) {
+    if (user.type !== 2) {
         return res.redirect("/");
     }
     next();
@@ -95,7 +106,7 @@ exports.chiefRequired = function(req, res, next) {
 //管理员权限管理
 exports.managerRequired = function(req, res, next) {
     var user = req.session.user;
-    if (user.role !== 3) {
+    if (user.type !== 3) {
         return res.redirect("/");
     }
     next();
