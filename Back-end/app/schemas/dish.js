@@ -35,7 +35,7 @@ DishSchema.pre('save', function(next) {
 });
 
 //每个dish实例拥有的方法
-DishSchema.mothods = {
+DishSchema.methods = {
     getName : function() {
         return this.name;
     },
