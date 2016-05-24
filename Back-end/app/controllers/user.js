@@ -18,7 +18,6 @@ exports.signup = function(req, res) {
                 console.log("注册成功");
                 res.redirect('/');
             });
-            res.end();
         }
     });
 };
@@ -26,14 +25,13 @@ exports.signup = function(req, res) {
 //login
 exports.login = function(req, res) {
     var _user = req.body.user;
-    console.log(req.body);
     var password = _user.password;
 
-    User.findOne({name: user.name}, function(err, user) {
+    User.findOne({name: _user.name}, function(err, user) {
         if (err) console.log(err);
 
         if (user) {
-            user.comparePassword(user.password, function(err, isMatch) {
+            user.comparePassword(_user.password, function(err, isMatch) {
                 if (err !== null) console.log(err);
                 if (isMatch === true) {
                     //设置session
@@ -70,6 +68,15 @@ exports.logout = function(req, res) {
     res.redirect("/");
 };
 
+//返回用户名
+exports.returnUserName = function(req, res) {
+    var user = req.session.user;
+    if (!user) {
+        res.json({userName: ''});
+    } else {
+        res.json({userName: user.name});
+    }
+};
 
 //检测是否已登录
 exports.loginRequired = function(req, res, next) {

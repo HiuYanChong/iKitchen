@@ -7,7 +7,10 @@ var DishSchema = new mongoose.Schema({
         unique:true
     },
     price:Number,
-    count:Number,
+    count: {
+        type:Number,
+        default:0
+    },
     meta:{
         createdAt:{
             type:Date,

@@ -17,6 +17,7 @@ module.exports = function(app) {
 
 
     //user相关
+    app.get('/returnUserName', User.returnUserName);//返回用户名
     app.get('/signup', function(req, res) {
         res.render("signup");
     });
