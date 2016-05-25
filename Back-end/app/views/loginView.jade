@@ -1,1 +1,38 @@
-include LoginView.html
+extends layout
+
+block content
+    div.container-fluid
+        div.row
+            div.col-md-12
+                ul.nav.nav-tabs
+                    li.active
+                        a(href='/#') 登入
+
+                    li.dropdown.pull-right
+                        a(href="#" data-toggle="dropdown" class="dropdown-toggle") 用户请登入
+                            strong.caret
+
+                        ul.dropdown-menu
+                            li
+                                a(href='/') 登入
+    div.row
+        div#div-logo.col-md-12
+            img(class="center" id="logo" alt="iKitchen Logo Image Preview" src="/images/logo.png")
+
+    div.row
+        div.col-md-12
+            form(class="form-horizontal center" id="login" action="/login" method="POST" role="form")
+                div.form-group
+                    label(for="name" class="col-sm-4 control-label") 账号:
+                    div.col-sm-8
+                        input(type="text" class="form-control" id="name" name="user[name]")
+
+                div.form-group
+                    label(for="passowrd" class="col-sm-4 control-label") 密码:
+                    div.col-sm-8
+                        input(type="password" class="form-control" id="password" name="user[password]")
+
+                div.form-group
+                    div.col-sm-offset-2.col-sm-10
+                        button(type="submit" value="loginForm" class="btn btn-default") 登入
+                        button(type="button" class="btn btn-default" id="forget-name-pw") 忘记账号／密码
