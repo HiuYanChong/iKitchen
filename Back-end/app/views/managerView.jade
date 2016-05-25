@@ -1,1 +1,16 @@
-include ManagerView.html
+extends managerIndexLayout
+
+block options
+    div.row
+        div#div-logo.col-md-12
+            img(class="center" id="logo" alt="iKitchen Logo Image Preview" src="/images/logo.png")
+                
+    div.row
+        div.col-md-12
+            ul.button-list.center
+                li
+                    a(class="btn btn-default" href="/addDish" role="button") 添加菜品
+                li
+                    a(class="btn btn-default" href="/deleteDish" role="button") 删除菜品
+                li
+                    a(class="btn btn-default" href="/changeDishCount" role="button") 修改菜品库存

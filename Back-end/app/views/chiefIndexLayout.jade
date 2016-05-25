@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    div.container-fluid
+        div.row
+            div.col-md-12
+                ul.nav.nav-tabs
+                    li.inactive
+                        a(href='/chiefView') 首页
+
+                    li.dropdown.pull-right
+                        a(href="#" data-toggle="dropdown" class="dropdown-toggle") （用户名）
+                            strong.caret
+
+                        ul.dropdown-menu
+                            li
+                                a(href="/chiefViewList") 接单
+                            li.divider
+                            li
+                                a(href="/logout") 登出
+
+                    li.pull-right
+                        img(id="logo-small" src="/images/logo_small.png" alt="small logo")
+
+        block options

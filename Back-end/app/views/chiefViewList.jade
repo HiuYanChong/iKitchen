@@ -1,1 +1,17 @@
-include ChiefViewList.html
+extends chiefIndexLayout
+
+block options
+    div.row
+        div.col-md-6.body-main
+            img(id="logo" alt="iKitchen Logo Image Preview" src="/images/logo.png")           
+        div.col-md-6.body-main
+            form(action="#" method="post")
+                fieldset
+                    legend 待完成菜品
+                    
+                    div.form-group
+                        select(multiple class="form-control" id="waiting-list-window")
+                            each val in [1, 2, 3, 4]
+                                option= val
+
+                    button(type="submit" class="btn btn-default") 接单
