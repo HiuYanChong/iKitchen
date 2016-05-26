@@ -57,10 +57,7 @@ module.exports = function(app) {
     app.get('/order', User.loginRequired, User.serverRequired, function(req, res) {
         res.render('orderView');
     });
-    app.post('/order', Order.addOrder);
-    app.get('/chiefViewList', User.loginRequired, User.chiefRequired, function(req, res) {
-        res.render('chiefViewList');
-    });
-    app.get('/showAllOrder', User.loginRequired, User.chiefRequired, Order.showAllOrder); //chiefViewList页面返回后用于页面请求所有的order
+    app.post('/order', User.loginRequired, User.chiefRequired, Order.addOrder);
+    app.get('/chiefViewList', User.loginRequired, User.chiefRequired, Order.showAllOrder);
     app.post('/chiefViewList', User.loginRequired, User.chiefRequired, Order.finishOrder);
 };
