@@ -11,7 +11,7 @@ block options
                     
                     div.form-group
                         select(multiple class="form-control" id="waiting-list-window")
-                            each val in [1, 2, 3, 4]
-                                option= val
+                            each val in order
+                                option #{val.name}
 
                     button(type="submit" class="btn btn-default") 接单
