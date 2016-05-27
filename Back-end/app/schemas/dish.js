@@ -7,7 +7,10 @@ var DishSchema = new mongoose.Schema({
         unique:true
     },
     price:Number,
-    count:Number,
+    count: {
+        type:Number,
+        default:0
+    },
     meta:{
         createdAt:{
             type:Date,
@@ -32,7 +35,7 @@ DishSchema.pre('save', function(next) {
 });
 
 //每个dish实例拥有的方法
-DishSchema.mothods = {
+DishSchema.methods = {
     getName : function() {
         return this.name;
     },

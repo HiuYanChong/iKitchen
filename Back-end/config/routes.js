@@ -17,16 +17,23 @@ module.exports = function(app) {
 
 
     //user相关
-    app.post('/login', User.login);
-    app.get('logout', User.logout);
+    app.get('/returnUserName', User.returnUserName);//返回用户名
+    app.get('/signup', function(req, res) {
+        res.render("signup");
+    });
+    app.post('/signup', User.signup);
+    app.post('/login', User.login); 
+    app.get('/logout', User.logout, function(req, res) {
+        res.render("loginView");
+    });
     app.get('/serverView', User.loginRequired, User.serverRequired, function(req, res) {
         res.render('serverView');
     });
     app.get('/managerView',  User.loginRequired, User.managerRequired, function(req, res) {
-        res.render('serverView');
+        res.render('managerView');
     });
     app.get('/chiefView',  User.loginRequired, User.chiefRequired, function(req, res) {
-        res.render('serverView');
+        res.render('chiefView');
     });
 
 
@@ -50,10 +57,7 @@ module.exports = function(app) {
     app.get('/order', User.loginRequired, User.serverRequired, function(req, res) {
         res.render('orderView');
     });
-    app.post('/order', User.loginRequired, User.serverRequired, Order.addOrder);
-    app.get('/chiefViewList', User.loginRequired, User.chiefRequired, function(req, res) {
-        res.render('chiefViewList');
-    });
-    app.get('/showAllOrder', User.loginRequired, User.chiefRequired, Order.showAllOrder); //chiefViewList页面返回后用于页面请求所有的order
-    app.post('chiefViewList', User.loginRequired, User.chiefRequired, Order.finishOrder);
+    app.post('/order', User.loginRequired, User.chiefRequired, Order.addOrder);
+    app.get('/chiefViewList', User.loginRequired, User.chiefRequired, Order.showAllOrder);
+    app.post('/chiefViewList', User.loginRequired, User.chiefRequired, Order.finishOrder);
 };

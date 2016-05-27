@@ -18,9 +18,10 @@
     "bcrypt-nodejs": "0.0.3",
     "connect-mongo": "^1.1.0",
     "express-session": "^1.13.0",
-    "gulp": "^1.0.1",
+    "gulp": "^3.9.1",
     "gulp-nodemon": "^2.0.6",
     "gulp-watch": "^4.3.5",
+    "jade": "^1.11.0",
     "morgan": "^1.7.0"
   },
   "keywords": [
@@ -32,5 +33,5 @@
   "bugs": {
     "url": "https://github.com/HiuYanChong/iKitchen/issues"
   },
-  "homepage": "https://github.com/HiuYanChong/iKitchen#readme",
+  "homepage": "https://github.com/HiuYanChong/iKitchen#readme"
 }
