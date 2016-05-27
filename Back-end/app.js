@@ -19,6 +19,7 @@ db.once('open', function () {
 
 app.set('views', 'app/views');
 app.set('view engine', 'jade');
+app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(session({
     secret:'ikitchen',
