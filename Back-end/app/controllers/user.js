@@ -99,6 +99,7 @@ exports.serverRequired = function(req, res, next) {
 //厨师权限管理
 exports.chiefRequired = function(req, res, next) {
     var user = req.session.user;
+    console.log(user.type);
     if (user.type !== 2) {
         return res.redirect("/");
     }
