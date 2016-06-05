@@ -57,7 +57,7 @@ module.exports = function(app) {
     app.get('/order', User.loginRequired, User.serverRequired, function(req, res) {
         res.render('orderView');
     });
-    app.post('/order', User.loginRequired, User.chiefRequired, Order.addOrder);
+    app.post('/order', User.loginRequired, User.serverRequired, Order.addOrder);
     app.get('/chiefViewList', User.loginRequired, User.chiefRequired, Order.showAllOrder);
     app.post('/chiefViewList', User.loginRequired, User.chiefRequired, Order.finishOrder);
 };

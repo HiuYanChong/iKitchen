@@ -38,17 +38,17 @@ exports.addOrder = function(req, res) {
                     errorMessage += "或 "+orders[index].dishName+" 菜品库存不足; ";
                 }
             });
+            console.log(errorMessage);
             res.json({success:0, error:errorMessage});
         }
     }
     //检查所点菜品是否存在和菜品库存是否满足需求
-    function haveDish(_name, _count,res) {
+    function haveDish(_name, _count, _length, length, res) {
         Dish.findByName(_name, function(err, dish) {
             if(err) {
                 console.log(err);
             } else if (dish) {
-                var countNow = dish.getCount();
-                
+                var countNow = dish.getCount();     
                 if (_count <= countNow) {
                     hasAllDish.push("1");
                 } else {
@@ -57,17 +57,19 @@ exports.addOrder = function(req, res) {
             } else {
                 hasAllDish.push("0");          
             }
-            cb(res);
-        });
-        
+            if (_length == length) {
+                cb(res);
+            }
+        });      
     }
     
     for (var i = 0; i < orders.length; i++) {
         var order = orders[i];
         var _name = order.dishName;
         var _count = order.count;
-        haveDish(_name, _count,res);
-    }
+        var _length = i + 1;
+        haveDish(_name, _count, _length, orders.length, res);
+    } 
 };
 
 //用于验证数组所有项是否都为1
