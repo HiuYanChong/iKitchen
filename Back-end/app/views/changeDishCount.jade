@@ -5,7 +5,7 @@ block options
         div.col-md-6.body-main
             img(id="logo" alt="iKitchen Logo Image Preview" src="/images/logo.png")           
         div.col-md-6.body-main
-            form(action="/changeDishCount" method="post")
+            form(id="form-change-count" action="/changeDishCount" method="post")
                 fieldset
                     legend 菜品库存
                     
@@ -18,24 +18,25 @@ block options
                                             th #
                                             th 菜品名称
                                             th 菜品库存
+                                            th 修改
                                             th 修改库存为
                                     tbody
-                                        tr.active
-                                            td 1
-                                            td fish
-                                            td 30
-                                            td
-                                                input(type="number" class="form-control")
-                                        tr.active
-                                            td 2
-                                            td hamburger
-                                            td 10
-                                            td
-                                                input(type="number" class="form-control")
-                                                    
-                                        each dish in dishes
+                                        //- tr.active
+                                        //-     td 1
+                                        //-     td fish
+                                        //-     td 30
+                                        //-     td
+                                        //-         input(type="number" class="form-control")
+                                        //- tr.active
+                                        //-     td 2
+                                        //-     td hamburger
+                                        //-     td 10
+                                        //-     td
+                                        //-         input(type="number" class="form-control")
+
+                                        each dish, i in dishes
                                             tr.active
-                                                td #{i}
+                                                td #{i+1}
                                                 td #{dish.name}
                                                 td #{dish.count}
                                                 td

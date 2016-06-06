@@ -10,9 +10,11 @@ exports.addDish = function(req, res) {
 		function(err, result) {
 			if (err) {
 				console.log(err);
-                res.json({success:0});
+                // res.json({success:0});
+                alert("添加失败");
 			} else {
-				res.json({success:1});
+				// res.json({success:1});
+				res.redirect('/managerView');
 			}
 		}
 	);
@@ -20,8 +22,7 @@ exports.addDish = function(req, res) {
 
 //deleteDish
 exports.deleteDish = function(req, res) {
-	var _dish = req.body.dish;
-	var _name = _dish.name;
+	var _name = req.body.name;
 	if (_name) {
 		Dish.remove({"name":_name}, function(err, dish) {
 			if (err) {
@@ -69,21 +70,48 @@ exports.showAllDish = function(req, res) {
 };
 
 //showAllDishAndCount
-exports.showAllDishAndCount = function(req, res) {
+exports.showAllDishForOrder = function(req, res) {
 	Dish.fetch(function(err, result) {
 		if (err) {
 			console.log(err);
 		}
 		console.log(result);
-        var DishNameAndCount = [];
-		for (var index = 0; index < result.length; index++) {
-			var _dish = result[index];
-			var _name = _dish.getName();
-			var _count = _dish.getCount();
-			var str = "{" + '"name":' + '"' + _name + '"' + ", " + '"count":' + '"' + _count + '"' + "}";
-			var obj = JSON.parse(str);
-			DishNameAndCount.push(obj);
+  //       var DishNameAndCount = [];
+		// for (var index = 0; index < result.length; index++) {
+		// 	var _dish = result[index];
+		// 	var _name = _dish.getName();
+		// 	var _count = _dish.getCount();
+		// 	var str = "{" + '"name":' + '"' + _name + '"' + ", " + '"count":' + '"' + _count + '"' + "}";
+		// 	var obj = JSON.parse(str);
+		// 	DishNameAndCount.push(obj);
+		// }
+  //       res.json({"dish":DishNameAndCount});
+        res.render('orderView', {
+            dishes: result
+        });
+	});
+};
+
+exports.showAllDishForChangeDishCount = function(req, res) {
+	Dish.fetch(function(err, result) {
+		if (err) {
+			console.log(err);
 		}
-        res.json({"dish":DishNameAndCount});
+		console.log(result);
+        res.render('changeDishCount', {
+            dishes: result
+        });
+	});
+};
+
+exports.showAllDishForDeleteDish = function(req, res) {
+	Dish.fetch(function(err, result) {
+		if (err) {
+			console.log(err);
+		}
+		console.log(result);
+        res.render('deleteDishView', {
+            dishes: result
+        });
 	});
 };
