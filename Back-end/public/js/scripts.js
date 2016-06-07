@@ -23,6 +23,9 @@ $(document).ready(function() {
             }
         });
 
+        for (var i = 0; i < orders.length; i++)
+            console.log(orders[i].dishName);
+
         $.ajax({
             url: "/order",
             method: "POST",
@@ -68,11 +71,11 @@ $(document).ready(function() {
         });
     });
 
-    // deleteDish页面，提交dish的id
+    // deleteDish页面，提交dish的name
     $("#form-delete-dish").submit(function(event) {
         event.preventDefault();
 
-        var dishName = $("#all-dish-list").find("option:selected").attr("value");
+        var dishName = $("#all-dish-list").find("option:selected").val();
 
         $.ajax({
             url: "/deleteDish",
@@ -92,17 +95,17 @@ $(document).ready(function() {
         });
     });
 
-    // changeDishCount页面，提交dish修改信息
-    $("#form-order").submit(function(event) {
+    // changeDishCount页面，提交dish的新count值
+    $("#form-change-count").submit(function(event) {
         event.preventDefault();
 
-        var modifiedDishes = [];
+        var dish = [];
 
         $("td > input[name='dish-check']:checked").parent().parent().each(function() {
             var name = $(this).find("td")[1].innerHTML;
             var count = $(this).find("td > input[name='count']").val();
             if (name !== '' && count !== '') {
-                modifiedDishes.push({
+                dish.push({
                     dishName: name,
                     count: count
                 });
@@ -112,13 +115,13 @@ $(document).ready(function() {
         $.ajax({
             url: "/changeDishCount",
             method: "POST",
-            data: JSON.stringify({modifiedDishes: modifiedDishes}),
+            data: JSON.stringify({dish: dish}),
             traditional: true,
             contentType: "application/json",
             processData: false,
             success: function(data) {
                 if (data['success'] === 1) {
-                    alert("点菜成功\n");
+                    alert("修改成功\n");
                 } else if (data['success'] === 0) {
                     alert("错误:\n" + data['error']);
                 } else {
