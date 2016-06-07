@@ -22,31 +22,31 @@ block options
                                             th 点菜
                                             th 所需数量
                                     tbody
-                                        tr.active
-                                            td 1
-                                            td fish
-                                            td 30
-                                            td
-                                                input(type="checkbox" name="dish-check" checked=true)
-                                            td
-                                                input(type="number" class="form-control" name="order-count")
-                                        tr.active
-                                            td 2
-                                            td hamburger
-                                            td 10
-                                            td
-                                                input(type="checkbox" name="dish-check")
-                                            td
-                                                input(type="number" class="form-control" name="order-count")
+                                        //- tr.active
+                                        //-     td 1
+                                        //-     td fish
+                                        //-     td 30
+                                        //-     td
+                                        //-         input(type="checkbox" name="dish-check" checked=true)
+                                        //-     td
+                                        //-         input(type="number" class="form-control" name="order-count")
+                                        //- tr.active
+                                        //-     td 2
+                                        //-     td hamburger
+                                        //-     td 10
+                                        //-     td
+                                        //-         input(type="checkbox" name="dish-check")
+                                        //-     td
+                                        //-         input(type="number" class="form-control" name="order-count")
 
-                                        //- each dish in dishes
-                                        //-     tr.active
-                                        //-         td #{i}
-                                        //-         td #{dish.name}
-                                        //-         td #{dish.count}
-                                        //-         td
-                                        //-             input(type="checkbox" name="dish-check")
-                                        //-         td
-                                        //-             input(type="number" class="form-control" name="orderCount")
+                                        each dish, i in dishes
+                                            tr.active
+                                                td #{i+1}
+                                                td #{dish.name}
+                                                td #{dish.count}
+                                                td
+                                                    input(type="checkbox" name="dish-check")
+                                                td
+                                                    input(type="number" class="form-control" name="order-count")
 
                     button(type="submit" class="btn btn-default btn-right") 点单

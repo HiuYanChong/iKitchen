@@ -42,21 +42,15 @@ module.exports = function(app) {
         res.render('addDishView');
     });
     app.post('/addDish', User.loginRequired, User.managerRequired, Dish.addDish);
-    app.get('/deleteDish', User.loginRequired, User.managerRequired, function(req, res) {
-        res.render('deleteDishView');
-    });
-    app.get('/showAllDish', User.loginRequired, User.managerRequired, Dish.showAllDish); //deleteDish页面返回后用于页面请求所有的dish
+    app.get('/deleteDish', User.loginRequired, User.managerRequired, Dish.showAllDishForDeleteDish);
+    // app.get('/showAllDish', User.loginRequired, User.managerRequired, Dish.showAllDish); //deleteDish页面返回后用于页面请求所有的dish
     app.post('/deleteDish', User.loginRequired, User.managerRequired, Dish.deleteDish);
-    app.get('/changeDishCount', User.loginRequired, User.managerRequired, function(req, res) {
-        res.render('changeDishCount');
-    });
-    app.get('/showAllDishAndCount', User.loginRequired, User.managerRequired, Dish.showAllDishAndCount); //changeDishCount页面返回后用于页面请求所有的dish和数量
+    app.get('/changeDishCount', User.loginRequired, User.managerRequired, Dish.showAllDishForChangeDishCount);
+    // app.get('/showAllDishAndCount', User.loginRequired, User.managerRequired, Dish.showAllDishAndCount); //changeDishCount页面返回后用于页面请求所有的dish和数量
     app.post('/changeDishCount', User.loginRequired, User.managerRequired, Dish.changeDishCount);
 
     //orderQueue相关
-    app.get('/order', User.loginRequired, User.serverRequired, function(req, res) {
-        res.render('orderView');
-    });
+    app.get('/order', User.loginRequired, User.serverRequired, Dish.showAllDishForOrder);
     app.post('/order', User.loginRequired, User.serverRequired, Order.addOrder);
     app.get('/chiefViewList', User.loginRequired, User.chiefRequired, Order.showAllOrder);
     app.post('/chiefViewList', User.loginRequired, User.chiefRequired, Order.finishOrder);
