@@ -38,10 +38,12 @@ exports.deleteDish = function(req, res) {
 //changeDishCount
 exports.changeDishCount = function(req, res) {
 	var _dish = req.body.dish;
-	var _name = dish.name;
-	var _count = dish.count;
-	if (_count >= 0) {
-		Dish.updata({"name":_name}, {"dish":_dish}, function(err, result) {
+	for (var index = 0; index < _dish.length; index++) {
+		var dish = _dish[index];
+		var _name = dish.name;
+		var _count = dish.count;
+		if (_count >= 0) {
+		Dish.updata({"name":_name}, {"count":_count}, function(err, result) {
 			if (err) {
 				console.log(err);
 				res.json({success:0});
@@ -49,6 +51,7 @@ exports.changeDishCount = function(req, res) {
 				res.json({success:1});
 			}
 		});
+	}
 	}
 };
 
