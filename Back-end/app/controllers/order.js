@@ -25,9 +25,11 @@ exports.addOrder = function(req, res) {
                 var order1 = orders[index];
                 var _name1 = order1.dishName;
                 var _count1 = order1.count;
-                for (var j = 0; j < _count1; j++) {
+                var finish_count = 0;
+                /*for (var j = 0; j < _count1; j++) {
                     createOrder(_name1,res);
-                }
+                }*/
+                createOrder(_name1, finish_count, _count1, res);
             }
             res.json({success:1});
         } else {
@@ -78,13 +80,14 @@ function isAllDone(ele, index, array) {
 }
 
 //创建一个order
-function createOrder(_name,res) {
+function createOrder(_name, finish_count, _count1, res) {
     //先减少菜品库存，再创建order
     Dish.findByName(_name, function(err, dish) {
         if (err) {
             console.log(err);
         }
         var countNow = dish.getCount();
+        console.log(countNow);
         if (countNow > 0) {
             dish.setCount(countNow - 1);
         }
@@ -94,6 +97,10 @@ function createOrder(_name,res) {
             if (err) {
                 console.log(err);
                 res.json({success:0, errr:"创建 "+_name+" order失败"});
+            }
+            finish_count++;
+            if (finish_count < _count1) {
+                createOrder(_name, finish_count, _count1, res);
             }
         });
     });   
