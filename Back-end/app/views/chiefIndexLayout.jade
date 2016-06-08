@@ -1,5 +1,8 @@
 extends layout
 
+block refresh
+    <meta http-equiv="refresh" content="30">
+
 block content
     div.container-fluid
         div.row
@@ -9,7 +12,7 @@ block content
                         a(href='/chiefView') 首页
 
                     li.dropdown.pull-right
-                        a(href="#" data-toggle="dropdown" class="dropdown-toggle") （用户名）
+                        a(href="#" data-toggle="dropdown" class="dropdown-toggle") 选项
                             strong.caret
 
                         ul.dropdown-menu
