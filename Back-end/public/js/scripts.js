@@ -41,8 +41,15 @@ $(document).ready(function() {
                 } else {
                     alert("其他错误!!");
                 }
-
-                window.location.reload();
+                var $checkboxes = $("input[type='checkbox']");
+                for (var i = 0; i < $checkboxes.length; i++) {
+                    $($checkboxes[i]).removeAttr('checked');
+                }
+                var $inputs = $("input[type='number']");
+                for (var j = 0; j < $inputs.length; j++) {
+                    $($inputs[j]).val('');
+                }
+                window.location.reload();      
             }
         });
     });
