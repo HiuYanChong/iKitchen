@@ -32,24 +32,43 @@ exports.deleteDish = function(req, res) {
                 res.json({success:1});
             }
 		});
-	}
+	} else {
+        res.json({success:0});
+    }
 };
 
 //changeDishCount
 exports.changeDishCount = function(req, res) {
-	var _dish = req.body.dish;
-	var _name = dish.name;
-	var _count = dish.count;
-	if (_count >= 0) {
-		Dish.updata({"name":_name}, {"dish":_dish}, function(err, result) {
-			if (err) {
-				console.log(err);
-				res.json({success:0});
-			} else {
-				res.json({success:1});
-			}
-		});
-	}
+	var dish = req.body.dish;
+    var errorMessage = '';
+    var success = 1;
+    function setCount(_name, _count, index, res) {
+        Dish.findByName(_name, function(err, result) {
+            if (err) {
+                console.log(err);
+                success = 0;
+                errorMessage += _name +"项修改失败; ";
+            } else {
+                result.setCount(_count);        
+            }
+        });
+    }
+    for (var index = 0; index < dish.length; index++) {
+        var _dish = dish[index];
+        var _name = _dish.dishName;
+        var _count = _dish.count;
+        if (_count >= 0) {
+            setCount(_name, _count, index, res);
+        } else {
+            success = 0;
+            errorMessage += "Dish" + _name +"项传入数值不符规定; ";
+        }
+    }
+    if (success == 1) {
+        res.json({"success":1});
+    } else {
+        res.json({"success":0, "error":errorMessage});
+    }
 };
 
 //showAllDish
