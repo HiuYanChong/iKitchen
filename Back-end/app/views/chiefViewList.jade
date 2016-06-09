@@ -10,7 +10,7 @@ block options
                     legend 待完成菜品
                     
                     div.form-group
-                        select(multiple class="form-control" id="waiting-list")
+                        select(multiple class="form-control" id="waiting-list" size="20")
                             each val in order
                                 option(value="#{val.id}") #{val.name}
 
