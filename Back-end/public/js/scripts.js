@@ -127,8 +127,16 @@ $(document).ready(function() {
                 } else {
                     alert("其他错误!!");
                 }
-
-                window.location.reload();
+                
+                var $checkboxes = $("#form-change-count input[type='checkbox']");
+                for (var i = 0; i < $checkboxes.length; i++) {
+                    $($checkboxes[i]).removeAttr('checked');
+                }
+                var $inputs = $("#form-change-count input[type='number']");
+                for (var j = 0; j < $inputs.length; j++) {
+                    $($inputs[j]).val('');
+                }
+                window.location.reload();           
             }
         });
     });
