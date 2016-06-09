@@ -14,8 +14,12 @@ $(document).ready(function() {
 
         $("td > input[name='dish-check']:checked").parent().parent().each(function() {
             var name = $(this).find("td")[1].innerHTML;
-            var count = $(this).find("td > input[name='order-count']").val();
-            if (name !== '' && count !== '') {
+            var count = parseInt($(this).find("td > input[name='order-count']").val());
+            if (name === '') {
+                alert("菜名为空");
+            } else if (isNaN(count) || count < 0) {
+                alert("输入的数量无效");
+            } else {
                 orders.push({
                     dishName: name,
                     count: count
@@ -23,8 +27,8 @@ $(document).ready(function() {
             }
         });
 
-        for (var i = 0; i < orders.length; i++)
-            console.log(orders[i].dishName);
+        // for (var i = 0; i < orders.length; i++)
+        //     console.log(orders[i].count);
 
         $.ajax({
             url: "/order",
@@ -84,22 +88,26 @@ $(document).ready(function() {
 
         var dishName = $("#all-dish-list").find("option:selected").val();
 
-        $.ajax({
-            url: "/deleteDish",
-            method: "POST",
-            data: JSON.stringify({name: dishName}),
-            contentType: "application/json",
-            processData: false,
-            success: function(data) {
-                if (data['success'] === 1) {
-                    alert("删除成功\n");
-                } else {
-                    alert("其他错误!!");
-                }
+        if (dishName === '') {
+            alert("菜名为空");
+        } else {
+            $.ajax({
+                url: "/deleteDish",
+                method: "POST",
+                data: JSON.stringify({name: dishName}),
+                contentType: "application/json",
+                processData: false,
+                success: function(data) {
+                    if (data['success'] === 1) {
+                        alert("删除成功\n");
+                    } else {
+                        alert("其他错误!!");
+                    }
 
-                window.location.reload();
-            }
-        });
+                    window.location.reload();
+                }
+            });
+        }
     });
 
     // changeDishCount页面，提交dish的新count值
@@ -110,8 +118,12 @@ $(document).ready(function() {
 
         $("td > input[name='dish-check']:checked").parent().parent().each(function() {
             var name = $(this).find("td")[1].innerHTML;
-            var count = $(this).find("td > input[name='count']").val();
-            if (name !== '' && count !== '') {
+            var count = parseInt($(this).find("td > input[name='count']").val());
+            if (name === '') {
+                alert("菜名为空");
+            } else if (isNaN(count) || count < 0) {
+                alert("输入的数量无效");
+            } else {
                 dish.push({
                     dishName: name,
                     count: count
