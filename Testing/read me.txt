@@ -1,0 +1,8 @@
+1.测试样例使用seleniumIDE于firefox录制并生成脚本
+2.脚本使用语言为java junit4
+3.由于项目采用web开发，互动性较强，功能测试采用手动测试相较于自动测试效率更高，因此本项目的功能测试以手动测试完成，而此自动测试是在项目开发完成后用以测试项目于不同平台的兼容性，项目脚本录制基于firefox浏览器，因此兼容性测试主要测试项目在google chrome上的功能是否正常执行。
+4.除原代码外还打包了jar档，可直接导入jar档进eclipse运行。
+5.由于测试运行需要藉助selenium RC，因此有几点注意事项：
+	一、导入专案后需要Add external JARS,把selenium-server-standalone-2.53.0.jar、selenium-java-2.53.0.jar两个jar档添加进来。
+	二、在运行测试样例前需要启动rc server，命令如下所示：java -jar selenium-server-standalone-2.53.0.jar
+	三、完成以上两步骤后，直接在eclipse内运行测试样例即可。

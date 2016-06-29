@@ -1,4 +1,4 @@
-// Empty JS for your own code to be here
+﻿// Empty JS for your own code to be here
 
 $(document).ready(function() {
     // login页面，忘记账户/密码
@@ -39,7 +39,7 @@ $(document).ready(function() {
             processData: false,
             success: function(data) {
                 if (data['success'] === 1) {
-                    alert("点菜成功\n");
+                    alert("点菜成功");
                 } else if (data['success'] === 0) {
                     alert("错误:\n" + data['error']);
                 } else {
@@ -72,7 +72,7 @@ $(document).ready(function() {
             processData: false,
             success: function(data) {
                 if (data['success'] === 1) {
-                    alert("接单成功\n");
+                    alert("接单成功");
                 } else {
                     alert("其他错误!!");
                 }
@@ -99,7 +99,7 @@ $(document).ready(function() {
                 processData: false,
                 success: function(data) {
                     if (data['success'] === 1) {
-                        alert("删除成功\n");
+                        alert("删除成功");
                     } else {
                         alert("其他错误!!");
                     }
@@ -140,7 +140,7 @@ $(document).ready(function() {
             processData: false,
             success: function(data) {
                 if (data['success'] === 1) {
-                    alert("修改成功\n");
+                    alert("修改成功");
                 } else if (data['success'] === 0) {
                     alert("错误:\n" + data['error']);
                 } else {
