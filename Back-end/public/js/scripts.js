@@ -195,32 +195,34 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: "/changeDishCount",
-            method: "POST",
-            data: JSON.stringify({dish: dish}),
-            traditional: true,
-            contentType: "application/json",
-            processData: false,
-            success: function(data) {
-                if (data['success'] === 1) {
-                    alert("修改成功");
-                } else if (data['success'] === 0) {
-                    alert("错误:" + data['error']);
-                } else {
-                    alert("其他错误!!");
+        if (!errFlag) {
+            $.ajax({
+                url: "/changeDishCount",
+                method: "POST",
+                data: JSON.stringify({dish: dish}),
+                traditional: true,
+                contentType: "application/json",
+                processData: false,
+                success: function(data) {
+                    if (data['success'] === 1) {
+                        alert("修改成功");
+                    } else if (data['success'] === 0) {
+                        alert("错误:" + data['error']);
+                    } else {
+                        alert("其他错误!!");
+                    }
+                    
+                    var $checkboxes = $("#form-change-count input[type='checkbox']");
+                    for (var i = 0; i < $checkboxes.length; i++) {
+                        $($checkboxes[i]).removeAttr('checked');
+                    }
+                    var $inputs = $("#form-change-count input[type='number']");
+                    for (var j = 0; j < $inputs.length; j++) {
+                        $($inputs[j]).val('');
+                    }
+                    window.location.reload();           
                 }
-                
-                var $checkboxes = $("#form-change-count input[type='checkbox']");
-                for (var i = 0; i < $checkboxes.length; i++) {
-                    $($checkboxes[i]).removeAttr('checked');
-                }
-                var $inputs = $("#form-change-count input[type='number']");
-                for (var j = 0; j < $inputs.length; j++) {
-                    $($inputs[j]).val('');
-                }
-                window.location.reload();           
-            }
-        });
+            });
+        }
     });
 });
