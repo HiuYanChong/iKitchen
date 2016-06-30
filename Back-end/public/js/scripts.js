@@ -1,4 +1,4 @@
-// Empty JS for your own code to be here
+﻿// Empty JS for your own code to be here
 
 $(document).ready(function() {
     // login页面，忘记账户/密码
@@ -60,7 +60,7 @@ $(document).ready(function() {
                     for (var j = 0; j < $inputs.length; j++) {
                         $($inputs[j]).val('');
                     }
-                    window.location.reload();      
+                    window.location.reload();
                 }
             });
         }
@@ -220,7 +220,7 @@ $(document).ready(function() {
                     for (var j = 0; j < $inputs.length; j++) {
                         $($inputs[j]).val('');
                     }
-                    window.location.reload();           
+                    window.location.reload();
                 }
             });
         }
