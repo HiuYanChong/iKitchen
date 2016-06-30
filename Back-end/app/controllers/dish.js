@@ -10,11 +10,11 @@ exports.addDish = function(req, res) {
 		function(err, result) {
 			if (err) {
 				console.log(err);
-                // res.json({success:0});
-                alert("添加失败");
+                res.json({success:0});
+                // alert("添加失败");
 			} else {
-				// res.json({success:1});
-				res.redirect('/managerView');
+				res.json({success:1});
+				// res.redirect('/managerView');
 			}
 		}
 	);
@@ -64,7 +64,7 @@ exports.changeDishCount = function(req, res) {
             errorMessage += "Dish" + _name +"项传入数值不符规定; ";
         }
     }
-    if (success == 1) {
+    if (success === 1) {
         res.json({"success":1});
     } else {
         res.json({"success":0, "error":errorMessage});

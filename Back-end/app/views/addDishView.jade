@@ -5,24 +5,24 @@ block options
         div.col-md-6.body-main
             img(id="logo" alt="iKitchen Logo Image Preview" src="/images/logo.png")           
         div.col-md-6.body-main
-            form(class="form-horizontal" action="#" method="post")
+            form(id="form-add-dish" class="form-horizontal" action="#" method="post")
                 fieldset
                     legend 新菜品信息
                     
                     div.form-group
                         label(for="dishName" class="col-sm-3 control-label") 名称：
                         div.col-sm-6
-                            input(type="text" class="form-control" id="dishName" name="dish[name]")
+                            input(type="text" class="form-control" name="dish[name]")
                     
                     div.form-group
                         label(for="dishPrice" class="col-sm-3 control-label") 价格（¥）：
                         div.col-sm-6
-                            input(type="text" class="form-control" id="dishName" name="dish[price]")
+                            input(type="number" min="0" class="form-control" name="dish[price]")
 
                     div.form-group
                         label(for="dishPrice" class="col-sm-3 control-label") 库存量：
                         div.col-sm-6
-                            input(type="text" class="form-control" id="quantity" name="dish[count]")
+                            input(type="number" min="0" class="form-control" name="dish[count]")
 
                     div.form-group
                         div.col-sm-offset-3.col-sm-10
